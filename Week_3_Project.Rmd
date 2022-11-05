@@ -1,0 +1,50 @@
+---
+title: "Developing Data Products"
+subtitle: "Week 3 Project"
+author: "Ezra Taylor"
+date: "11/4/2022"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+```
+
+## US Population from 1790 to 1970
+
+This code shows data with the US population (in millions) from 1790 to 1970. We will plot this data with the plotly package.
+
+```{r code, echo=TRUE,cache=TRUE,comment= ""}
+data(uspop)
+data <- data.frame(uspop)
+data$year <- seq(1790,1970,by=10)
+head(data)
+
+```
+
+## US Population from 1790 to 1970
+
+This code generates the plot.  
+
+```{r code2,echo=TRUE,cache=TRUE}
+library(ggplot2)
+library(plotly)
+library(dplyr)
+library(tidyr)
+fig <- plot_ly(data = data,x = ~year,y = ~uspop,
+      type = "scatter",
+      mode="lines",
+      line = list(color="green",width=3))
+fig <- fig %>% layout(title = "US Population by Year",
+      xaxis = list(title = "Year"),
+      yaxis = list(title = "US Population (in millions)"))
+
+```
+
+## US Population from 1790 to 1970  
+
+Here is the plot!
+
+```{r plot}
+fig
+```
